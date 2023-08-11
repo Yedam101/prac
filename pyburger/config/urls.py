@@ -19,7 +19,7 @@ from django.urls import path
 from .views import main, burger_list
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', main),
     path('burgers/', burger_list)
 ]

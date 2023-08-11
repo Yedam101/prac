@@ -2,5 +2,12 @@
 <html lang="en">
 <body>
     <h2>HelloHello</h2>
+    {% for burger in bibi %}
+        <div>
+            {{ burger.name }}
+            (price: {{ burger.price }},
+            calorie: {{burger.calories}})
+        </div>
+    {% endfor %}
 </body>
 </html>

@@ -1,5 +1,6 @@
 # v1. from django.http import HttpResponse
 from django.shortcuts import render
+from burgers.models import Burger
 
 
 
@@ -7,7 +8,12 @@ def main(request):
     return render(request, "main.html")
 
 def burger_list(request):
-    return render(request, "burger_list.html")
+    burgers = Burger.objects.all()
+    
+    context = {
+        "bibi": burgers,
+    }
+    return render(request, "burger_list.html", context)
 
 
 ''' v1

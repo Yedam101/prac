@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>검색</h1>
+    <div>
+        <form method="GET">
+            <input type="text" name="url_keyword">
+            <button type="submit">검색</button>
+        </form>
+    </div>
+    <h2>결과</h2>
+    {% for burger in burgers %}
+        <div>
+        {{ burger.name }}
+        (price: {{ burger.price }},
+        calorie: {{ burger.calories }})
+        </div>
+    {% endfor %}
+</body>
+</html>

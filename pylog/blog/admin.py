@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import Post, Comment
 
-@admin.register
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["title", "thumbnail"]
 
-@admin.register
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     pass

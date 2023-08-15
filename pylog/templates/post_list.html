@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="navbar">
+        <span>
+            <a href="/">rvlog</a>
+        </span>
+        <a href="/post/upload/" class="btn btn-primary">글작성</a>
+    </div>
+    <div id="post-list">
+        <ul class="posts">
+            {% for p in post %}
+                <li class="post">
+                    <div>
+                        <a href="/post/{{ p.id }}"><h2><b>{{ p.title }}</b></h2></a>
+                    </div>
+                    <p>{{ p.content }}</p>
+                    <ul class="comments">
+                        {% for comment in p.comment_set.all %}
+                            <li class="comment">
+                                {{ comment.content }}
+                            </li>
+                        {% empty %}
+                            <li class="comment-empty">no comment yet</li>
+                        {% endfor %}
+                    </ul>
+                    {% if p.thumbnail %}
+                        <a href="/post/{{p.id}}">
+                            <img src="{{ p.thumbnail.url }}" alt="">
+                        </a>
+                    {% else %}
+                        <img src="" alt="">
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

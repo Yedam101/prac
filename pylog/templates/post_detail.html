@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="navbar">
+        {% if detail.thumbnail %}
+            <img src="{{ detail.thumbnail.url }}">
+        {% endif %}
+        <a href="/post">
+            <span>rvlog</span>
+        </a>
+        <a href="/post/{{ detail.id }}/update/" class="btn btn-primary">글수정</a>
+        <a href="/post/{{ detail.id }}/delete/" class="btn btn-delete">글삭제</a>
+    </div>
+    <div id="post-detail">
+        <p style="margin-top: 80px;">
+            <b>
+                {{ detail.content|linebreaksbr }}
+            </b>
+        </p>
+    </div>
+    <div style="margin-left: 10px;">
+        <p>Comment</p>
+        <ul class="comments">
+            {% for comment in detail.comment_set.all %}
+                <li class="comment" style="margin-top: 5px;"> 
+                    {{ comment.content }}
+                </li>
+            {% empty %}
+                <li class="comment-empty">no comment yet</li>
+            {% endfor %}
+        </ul>
+        <div id="post-add">
+            <form method="POST">
+            {% csrf_token %}
+                <div>
+                    <label>댓글 작성</label>
+                    <textarea name="comment-content" style="outline: black; border: 1px solid black;" ></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn">작성</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

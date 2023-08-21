@@ -8,4 +8,17 @@
         </div>
     </div>
 </section>
+<section class="py-3 text-center container">
+    <div class="row py-lg-5">
+        <div class="py-3 col-lg-6 col-md-8 mx-auto">
+            {{ user.username }} (ID: {{user.id }})
+            <div class="py-3">
+                <a href="/users/logout/">
+                    <button type="button" class="btn btn-primary">로그아웃</button>
+                </a>    
+            </div>
+        </div>
+    </div>
+</section>
+        
 {% endblock %}

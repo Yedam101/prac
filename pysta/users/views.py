@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import LoginForm
+from .forms import LoginForm, SignupForm
+from .models import User
 
 
 def login_view(request):
@@ -49,3 +50,26 @@ def logout_view(request):
     logout(request)
 
     return redirect("/users/login/")
+
+
+
+def signup(request):
+    if request.method == "POST":
+        form = SignupForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("/posts/feeds/")
+    
+    else:
+        form = SignupForm()
+    
+    '''
+    context로 전달되는 form은 두 가지 경우
+    1. POST 요청에서 생성된 form이 유효하지 않은 경우 -> 에러를 포함한 form이 사용자에게 보여짐
+    2. GET 요청으로 빈 form이 생성된 경우 -> 빈 form이 사용자에게 보여짐
+    '''
+    context = {
+        "form":form
+    }
+    return render(request, "users/signup.html", context)
